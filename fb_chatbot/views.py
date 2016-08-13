@@ -49,11 +49,45 @@ def post_facebook_message(fbid, recevied_message):
     response_text = recevied_message + ' :)'
     response_text = emoji_search(recevied_message.lower())
 
+    message_generic_template = {
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements":[
+                  {
+                    "title":"Welcome to Sec 23 Giving Back Society",
+                    "image_url":"http://worldversus.com/img/ironman.jpg",
+                    "subtitle":"We\'ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url":"https://google.com/",
+                        "title":"View Website"
+                      } ]}]}}}
+
+    message_image = {
+        "attachment":{
+          "type":"image",
+          "payload":{
+            #"url":"http://thecatapi.com/api/images/get?format=src&type=png"
+            "url" : "http://worldversus.com/img/ironman.jpg"
+          }
+        }
+    }
+
+
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":response_text}})
+    response_img_msg = json.dumps({"recipient":{"id":fbid}, "message":message_image})
+    response_temp_msg = json.dumps({"recipient":{"id":fbid}, "message":message_generic_template})
     print 'Febfalsbdfjk'
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     print 'wobjiodfsobdhbodfg'
+    pprint(status.json())
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_img_msg)
+    pprint(status.json())
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_temp_msg)
     pprint(status.json())
 
 
