@@ -44,13 +44,17 @@ def emoji_search(search_string):
         return " ".join(result_arr[:5])
 
 def post_facebook_message(fbid, recevied_message):
+    print 'inside message function'
+
     response_text = recevied_message + ' :)'
     response_text = emoji_search(recevied_message.lower())
 
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":response_text}})
-    
+    print 'Febfalsbdfjk'
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+    print = 'wobjiodfsobdhbodfg       2 '
+    
     pprint(status.json())
 
 
