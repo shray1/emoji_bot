@@ -93,7 +93,7 @@ def index(request):
     return HttpResponse(emoji_search(search_string))
 
 def test():
-    post_facebook_message('abhishek.sukumar.1','test message')
+    post_facebook_message('1366822393332584','test message')
 
 
 
