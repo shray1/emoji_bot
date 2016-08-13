@@ -68,6 +68,7 @@ class MyQuoteBotView(generic.View):
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):
         # Converts the text payload into a python dictionary
+        print 'Inside post function'
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
@@ -76,10 +77,12 @@ class MyQuoteBotView(generic.View):
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
                 if 'message' in message:
+                    print 'inside first if'
                     # Print the message to the terminal
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly. 
-                    if ['message']['text']:  
+                    if ['message']['text']:
+                        print 'inside second if'  
                         post_facebook_message(message['sender']['id'], message['message']['text'])
 
         return HttpResponse()    
