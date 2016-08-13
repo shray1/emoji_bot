@@ -84,7 +84,7 @@ class MyQuoteBotView(generic.View):
                     # Print the message to the terminal
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly. 
-                    if message['text']:
+                    if message['message']['text']:
                         print 'inside second if'  
                         post_facebook_message(message['sender']['id'], message['message']['text'])
 
